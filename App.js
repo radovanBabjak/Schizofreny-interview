@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { EpisodeItem } from './components/EpisodeItem';
+
+const baseUrl = 'https://raw.githubusercontent.com/RyanHemrick/star_wars_movie_app/master/';
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
@@ -8,7 +11,7 @@ export default function App() {
 
   const getMovies = async () => {
      try {
-      const response = await fetch('https://raw.githubusercontent.com/RyanHemrick/star_wars_movie_app/master/movies.json');
+      const response = await fetch(baseUrl + 'movies.json');
       const json = await response.json();
       setMovies(json.movies);
 
@@ -25,15 +28,20 @@ export default function App() {
   }, [])
   
   return (
-    <View style={styles.container}>
+    <View style={styles.appContainer}>
       {isLoading ? <ActivityIndicator> </ActivityIndicator> : 
         errorMsg ? <Text>{errorMsg}</Text> : (
         
           <FlatList
+            contentContainerStyle={ styles.movieContainer }
             data={movies}
             keyExtractor={({ episode_number }) => episode_number}
+            
             renderItem={({ item }) => (
-              <Text>{item.title}</Text>
+              <EpisodeItem
+                title={item.title}
+                imageSrc={baseUrl + 'public/images/' + item.poster}
+              />
             )}
           />
         )}
@@ -42,10 +50,14 @@ export default function App() {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  movieContainer: {
+    flexDirection: 'row',
+  }
 });
