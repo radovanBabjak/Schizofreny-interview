@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, ActivityIndicator, FlatList, Text, View, Button } from 'react-native';
+import { StyleSheet, ActivityIndicator, FlatList, Text, View } from 'react-native';
 import { EpisodeItem } from './components/EpisodeItem';
+import { Button } from './components/Button';
 
 const baseUrl = 'https://raw.githubusercontent.com/RyanHemrick/star_wars_movie_app/master/';
 
@@ -36,7 +37,7 @@ export default function App() {
   }, [])
   
   return (
-    <View style={styles.appContainer}>
+    <View style={ styles.appContainer }>
       {isLoading ? <ActivityIndicator> </ActivityIndicator> : (
         <View>
           <FlatList
@@ -48,9 +49,9 @@ export default function App() {
             
             renderItem={({ item }) => (
               <EpisodeItem
-                titleWithEpisode={item.title}
-                episodeNumber={item.episode_number}
-                imageSrc={baseUrl + 'public/images/' + item.poster}
+                titleWithEpisode={ item.title }
+                episodeNumber={ item.episode_number }
+                imageSrc={ baseUrl + 'public/images/' + item.poster }
               />
             )}
           >
@@ -58,14 +59,14 @@ export default function App() {
 
           <View>
             <Button 
-              color={"#fca311"}
-              title="sort ascendingly" 
+              backgroundColor={"#fca311"}
+              description="sort ascendingly" 
               onPress={sortEpisodesAscendingly}
             />
 
             <Button 
-              color={"#14213d"}
-              title="sort descendingly" 
+              backgroundColor={"#14213d"}
+              description="sort descendingly" 
               onPress={sortEpisodesDescendingly}
             />
           </View>
