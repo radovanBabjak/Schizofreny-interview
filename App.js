@@ -48,7 +48,8 @@ export default function App() {
             
             renderItem={({ item }) => (
               <EpisodeItem
-                title={item.title}
+                titleWithEpisode={item.title}
+                episodeNumber={item.episode_number}
                 imageSrc={baseUrl + 'public/images/' + item.poster}
               />
             )}

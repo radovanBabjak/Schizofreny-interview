@@ -1,15 +1,26 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-export function EpisodeItem({ title, imageSrc }) {
-  return (
-    <View style={ styles.container }>
-        <Image 
-            source={ imageSrc } 
-            style={ styles.image }
-        />
-        <Text>{ title }</Text>
-    </View>
-  );
+export function EpisodeItem({ titleWithEpisode, imageSrc, episodeNumber }) {
+    const extractTitle = (titleWithEpisode) => {
+        return titleWithEpisode.split('- ')[1]
+    }
+
+    return (
+        <View style={ styles.container }>
+            <Image 
+                source={ imageSrc } 
+                style={ styles.image }
+            />
+            <View style={styles.row}>
+                <Text> Title: </Text>
+                <Text> { extractTitle(titleWithEpisode) } </Text>
+            </View>
+            <View style={styles.row}>
+                <Text> Episode: </Text>
+                <Text> { episodeNumber } </Text>
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -22,5 +33,9 @@ const styles = StyleSheet.create({
         height: 280, 
         marginBottom: '15px',
     },
+
+    row: {
+        flexDirection: 'row'
+    }
 });
   
