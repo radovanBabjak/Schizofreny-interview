@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { StyleSheet, ActivityIndicator, FlatList, Text, View, ScrollView } from 'react-native';
 import { EpisodeItem } from './components/EpisodeItem';
 import { Button } from './components/Button';
 
@@ -39,9 +39,8 @@ export default function App() {
   return (
     <View style={ styles.appContainer }>
       {isLoading ? <ActivityIndicator> </ActivityIndicator> : (
-        <View>
+        <ScrollView>
           <FlatList
-            contentContainerStyle={ styles.movieContainer }
             data={movies}
             keyExtractor={({ episode_number }) => episode_number}
 
@@ -70,7 +69,7 @@ export default function App() {
               onPress={sortEpisodesDescendingly}
             />
           </View>
-        </View>
+        </ScrollView>
       )}
     </View>
   );
@@ -83,8 +82,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  movieContainer: {
-    flexDirection: 'row',
-  }
 });

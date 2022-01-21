@@ -25,17 +25,18 @@ export function EpisodeItem({ titleWithEpisode, imageSrc, episodeNumber }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: '15px'
+    padding: '15px',
+    alignItems: 'center',
   },
 
   image : { 
-    width: 200, 
-    height: 280, 
+    width: 100, 
+    height: 140, 
     marginBottom: '15px',
   },
 
   row: {
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });
   
