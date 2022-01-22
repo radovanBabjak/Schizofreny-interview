@@ -1,9 +1,16 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { ReactElement } from 'react';
+import { StyleSheet, Text, View, Image, ImageURISource } from 'react-native';
 
-export function EpisodeItem({ titleWithEpisode, imageSrc, episodeNumber }) {
-  const extractTitle = (titleWithEpisode) => {
-    return titleWithEpisode.split('- ')[1]
-  }
+interface IProps {
+  titleWithEpisode: string,
+  imageSrc: ImageURISource,
+  episodeNumber: number
+};
+
+export function EpisodeItem({ titleWithEpisode, imageSrc, episodeNumber }: IProps): ReactElement {
+  const extractTitle = (titleWithEpisode: string) => {
+    return titleWithEpisode.split('- ')[1];
+  };
 
   return (
     <View style={ styles.container }>
