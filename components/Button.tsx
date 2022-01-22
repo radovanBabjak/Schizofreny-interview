@@ -1,6 +1,13 @@
+import { ReactElement } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export function Button({ description, onPress, backgroundColor }) {
+interface IProps {
+  description: string,
+  onPress: () => unknown,
+  backgroundColor: string
+};
+
+export function Button({ description, onPress, backgroundColor }: IProps): ReactElement {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: backgroundColor }]}
