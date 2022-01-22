@@ -3,6 +3,11 @@ import { StyleSheet, ActivityIndicator, FlatList, Text, View, ScrollView } from 
 import { EpisodeItem } from './components/EpisodeItem';
 import { Button } from './components/Button';
 
+const SortType = {
+  'Ascending': true,
+  'Descending': false,
+}
+
 const baseUrl = 'https://raw.githubusercontent.com/RyanHemrick/star_wars_movie_app/master/';
 
 export default function App() {
@@ -24,12 +29,13 @@ export default function App() {
     }
   }
 
-  const sortEpisodesAscendingly = () => {
-    setMovies([...movies.sort((x, y) => x.episode_number > y.episode_number)]);
-  }
-
-  const sortEpisodesDescendingly = () => {
-    setMovies([...movies.sort((x, y) => x.episode_number < y.episode_number)]);
+  const getEpisodeSortingFunction = (isAscending) => {
+    const updateSortedEpisodes = (sortingFunction) => setMovies([...movies.sort(sortingFunction)]);
+    
+    if (isAscending) {
+      return () => updateSortedEpisodes((x, y) => x.episode_number > y.episode_number);
+    }
+    return () => updateSortedEpisodes((x, y) => x.episode_number < y.episode_number);
   }
 
   useEffect(() => {
@@ -41,7 +47,7 @@ export default function App() {
       {isLoading ? <ActivityIndicator> </ActivityIndicator> : (
         <ScrollView>
           <FlatList
-            data={movies}
+            data={ movies }
             keyExtractor={({ episode_number }) => episode_number}
 
             ListEmptyComponent={<Text>{ errorMsg }</Text>}
@@ -60,13 +66,13 @@ export default function App() {
             <Button 
               backgroundColor={"#fca311"}
               description="sort ascendingly" 
-              onPress={sortEpisodesAscendingly}
+              onPress={getEpisodeSortingFunction(SortType.Ascending)}
             />
 
             <Button 
               backgroundColor={"#14213d"}
               description="sort descendingly" 
-              onPress={sortEpisodesDescendingly}
+              onPress={getEpisodeSortingFunction(SortType.Descending)}
             />
           </View>
         </ScrollView>
