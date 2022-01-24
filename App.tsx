@@ -6,9 +6,9 @@ import { MovieConfig, SortType } from './types';
 const baseUrl = 'https://raw.githubusercontent.com/RyanHemrick/star_wars_movie_app/master/';
 
 export default function App(): ReactElement {
-  const [isLoading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [movies, setMovies] = useState<MovieConfig[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
   const getMovies = async (): Promise<void> => {
      try {
