@@ -18,11 +18,11 @@ export function EpisodeItem({ titleWithEpisode, imageSrc, episodeNumber }: IProp
         source={ imageSrc } 
         style={ styles.image }
       />
-      <View style={styles.row}>
+      <View style={ styles.row }>
         <Text> Title: </Text>
         <Text> { extractTitle(titleWithEpisode) } </Text>
       </View>
-      <View style={styles.row}>
+      <View style={ styles.row }>
         <Text> Episode: </Text>
         <Text> { episodeNumber } </Text>
       </View>

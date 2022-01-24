@@ -24,13 +24,13 @@ export default function App(): ReactElement {
     }
   }
 
-  const sortMovies = (isAscending: SortType): () => unknown => {
+  const sortMovies = (sortType: SortType): () => unknown => {
 
     return () => setMovies(() => {
-      return [...movies.sort((x: MovieConfig, y: MovieConfig) => {
-        return isAscending === SortType.Ascending ? 
-          x.episode_number - y.episode_number : 
-          y.episode_number - x.episode_number
+      return [...movies.sort(({ episode_number: x }: MovieConfig, { episode_number: y }: MovieConfig) => {
+        return sortType === SortType.Ascending ? 
+          x - y : 
+          y - x
       })]
     })
   }
