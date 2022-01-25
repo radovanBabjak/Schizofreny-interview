@@ -27,10 +27,8 @@ export default function App(): ReactElement {
   const sortMovies = (sortType: SortType): () => unknown => {
 
     return () => setMovies(() => {
-      return [...movies.sort(({ episode_number: x }: MovieConfig, { episode_number: y }: MovieConfig) => {
-        return sortType === SortType.Ascending ? 
-          x - y : 
-          y - x
+      return [...movies.sort((x: MovieConfig, y: MovieConfig) => {
+        return (sortType === SortType.Ascending ? 1 : -1) * (x.episode_number - y.episode_number)
       })]
     })
   }
